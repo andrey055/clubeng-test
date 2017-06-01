@@ -4,6 +4,7 @@
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\LoginForm */
 
+use dosamigos\tinymce\TinyMce;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
@@ -24,7 +25,20 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+
+    <?= $form->field($model, 'username')->widget(TinyMce::className(), [
+        'options' => ['rows' => 6, 'columns' => 100],
+        'language' => 'ru',
+        'clientOptions' => [
+            'plugins' => [
+                'advlist autolink lists link charmap  print hr preview pagebreak',
+                'searchreplace wordcount textcolor visualblocks visualchars code fullscreen nonbreaking',
+                'save insertdatetime media table contextmenu template paste image'
+            ],
+            'toolbar' => 'undo redo | bold '
+        ]
+    ]); ?>
+
 
         <?= $form->field($model, 'password')->passwordInput() ?>
 
